@@ -1,0 +1,16 @@
+/***
+ * sumuje kolumnę tablicy 2d
+ * @array {array} tablica 2d z nazwami kolumn w pierwszym wierszu
+ * @name {string} nazwa kolumny
+ ***/
+ 
+function sumColByName(array, name){
+
+  let values = array.slice();
+  let header = values.splice(0,1)[0];
+  let col_index = header.indexOf(name);
+  let col = values.map(x => x[col_index]).flat();
+  let sum = col.reduce((sum,item) => sum + item);
+
+  return sum;
+}
