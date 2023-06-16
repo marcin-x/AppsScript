@@ -1,0 +1,49 @@
+/***
+ * tworzy nową tablicę 2d łącząc dwie tablice 2d za pomocą klucza
+ * @left_array {array} tablica 2d z nagłówkami w pierwszym wierszu
+ * @right_array {array} tablica 2d z nagłówkami w pierwszym wierszu
+ * @left_key {string} nazwa kolumny, która jest kluczem lewej tablicy
+ * @right_key {string} nazwa kolumny, która jest kluczem prawej tablicy
+ ***/
+ 
+function arrayLeftJoin(left_array, right_array, left_key, right_key) {
+
+  let left_header = left_array.splice(0, 1)[0];
+  let right_header = right_array.splice(0, 1)[0];
+  let new_header = left_header.concat(right_header);
+
+  let left_index = left_header.indexOf(left_key);
+  let right_index = right_header.indexOf(right_key);
+
+  let new_array = [];
+
+  left_array.forEach(function(left_row) {
+
+    let right_row_index = right_array.findIndex(row => row[right_index] === left_row[left_index]);
+
+    let new_row;
+
+    if (right_row_index === -1) {
+
+      new_row = left_row.concat( Array(right_header.length).fill(''));
+
+    } else {
+
+      let right_row = right_array[right_row_index];
+
+      new_row = left_row.concat(right_row);
+    
+    };
+
+    new_array.push(new_row);
+
+  });
+
+  new_array.unshift(new_header);
+
+  let new_header_right_key_index = new_header.indexOf(right_key);
+
+  new_array.forEach(row => row.splice(new_header_right_key_index, 1) );
+
+  return new_array;
+}
