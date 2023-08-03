@@ -1,0 +1,46 @@
+/***
+ * zwraca obiekt ze zbiorem obiektów na podstawie tablicy 2d, w której kluczem jest zawartość kolumny o numerze "col", a nagłówki znajdują się w pierwszym wierszu
+ * let values = [
+ *   ['id', 'wiek', 'miasto']
+ *   ['xxx.yyy@rys.pl',	20,	'Gdańsk'],
+ *   ['aaa.bbb@rys.pl',	30,	'Kraków'],
+ * ];
+ * ->>  {
+ *        xxx.yyy@rys.p: {
+ *          wiek: 20,
+ *          miasto: 'Gdańsk'
+ *        },
+ *        aaa.bbb@rys.pl: {
+ *          wiek: 30,
+ *          miasto: 'Kraków'
+ *        }
+ *      }
+ * @values {array} tablica 2d z nagłówkami w pierwszym wierszu
+ * @col_name {string} nazwa kolumny, która ma być kluczem obiektu
+ ***/
+function arrayToObject(values, col_name) {
+
+  let main_obj = {};
+  let header = values.splice(0, 1)[0];
+  let index = header.indexOf(col_name);
+
+  values.forEach(function(row) {
+    
+    let obj = {};
+    
+    header.forEach(function(x, i){
+
+      if (i != index) {
+
+        obj[x] = row[i];
+
+      };
+
+    });
+
+    main_obj[row[index]] = obj;
+
+  });
+
+  return main_obj;
+}
