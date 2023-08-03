@@ -1,0 +1,15 @@
+/**
+ * zwraca unikalne wartości z tablicy 2d dla kolumny o nazwie "name"
+ * @array {array} tablica 2d z nagłówkami w pierwszym wierszu
+ * @col_name {string} nazwa kolumny 
+ */
+function arrayUniqueColumnValues(array, col_name) {
+
+  let header = array[0];
+  let index = header.indexOf(col_name);
+  let column = array.map(x => x[index]).flat();
+  column.shift();
+  let unique = [... new Set(column)];
+
+  return unique;
+}
