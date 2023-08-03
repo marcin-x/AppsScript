@@ -1,0 +1,25 @@
+/**
+ * filtruje wartości tablicy 2d na podstawie kolumny
+ * @array {array} tablica 2d z nagłówkami w pierwszym wierszu
+ * @obj {object} obiekt typu: {col_name: [value1, value2, ...]} gdzie col_name jest nazwą kolumny do przefiltrowanie, a wartości value1, ... są wartościami w tej kolumnie
+ */
+function arrayFilterColumn(array, obj) {
+
+  let array_copy = array.slice(0);
+  let header = array_copy.splice(0, 1)[0];
+  let key = Object.keys(obj)[0];
+  let key_index = header.indexOf(key);
+  let filter_values = obj[key];
+  let filtered_array = [];
+
+  filter_values.forEach(function(f) {
+
+    filtered_array = filtered_array.concat( array_copy.filter(x => x[key_index] === f) );
+  
+  });
+
+  filtered_array.unshift(header);
+
+  return filtered_array;
+
+}
