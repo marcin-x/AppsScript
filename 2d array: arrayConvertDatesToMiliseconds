@@ -1,0 +1,20 @@
+/**
+ * konwertuje pola tablicy 2d o typie data na typ getTime()
+ * @array {array} tablica 2d, w której w pierwszym wierszu znajdują się nagłówki
+ * @columns {array} tablica 1d zawierająca nazwy kolumn do konwersji
+ */
+function arrayConvertDatesToMiliseconds(array, columns) {
+
+  let header = array.splice(0, 1)[0];
+  let indexes = columns.map(x => header.indexOf(x) );
+
+  indexes.forEach(function(i) {
+
+    array.forEach(x => x[i] === '' ? x[i]='':x[i]=x[i].getTime() );
+
+  });
+
+  array = [header].concat(array);
+
+  return array;
+}
