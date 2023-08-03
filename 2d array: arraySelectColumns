@@ -1,0 +1,23 @@
+/**
+ * Zwraca kolumny z tablicy 2d "array", których nazwy zawierają się w tablicy "names_array"
+ * @param {array} array Tablica 2d, gdzie pierwszy wiersz zawiera nagłówki
+ * @names_array {array} tablica 1d z nazwami kolumn do wybrania
+ * @return {array} Zwraca kolumny
+ */
+function arraySelectColumns(array, names_array) {
+
+  let header = array[0];
+  let indexes = names_array.map(x => header.indexOf(x) );
+
+  let new_array = array.map(function(x) {
+
+    let row = [];
+
+    indexes.forEach(y => row.push(x[y]) )
+    
+    return row
+  });
+
+  return new_array;
+
+}
